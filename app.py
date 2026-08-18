@@ -114,6 +114,15 @@ formatted_agent_chain = (
 
 # --- 3. FastAPI App ---
 
+# --- 3. FastAPI App ---
+
+# --- 3. FastAPI App ---
+
+app = FastAPI(
+    title="Indian Weather & Cinema Agent",
+    version="1.0"
+)
+
 @app.get("/")
 def home():
     return {
@@ -123,10 +132,16 @@ def home():
 
 @app.get("/test")
 def test():
-    return {"test": "working"}
+    return {
+        "test": "working"
+    }
 
 add_routes(
     app,
     formatted_agent_chain,
     path="/agent"
 )
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
